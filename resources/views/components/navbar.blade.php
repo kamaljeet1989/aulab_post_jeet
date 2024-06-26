@@ -27,6 +27,33 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
+      @auth 
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hello{{Auth::user()->name}}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.querySelector('#form-layout').submit();">Logout</a></li>
+            <form action="{{route('logout')}} method="POST" id="form-logout">
+           @csrf
+        </form>
+          </ul>
+        </li>
+        @endauth 
+
+        @guest 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome Guest
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{route('register')}}">Register</a></li>
+            <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
+        </ul>
+        </li>
+        @endguest
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
